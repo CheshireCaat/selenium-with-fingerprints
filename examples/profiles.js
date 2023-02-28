@@ -1,7 +1,7 @@
 require('chromedriver');
 require('dotenv').config();
 
-const { plugin } = require('../src');
+const { plugin } = require('..');
 const { Options } = require('selenium-webdriver/chrome');
 const { Builder, until, By } = require('selenium-webdriver');
 

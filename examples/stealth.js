@@ -1,8 +1,8 @@
 require('chromedriver');
 require('dotenv').config();
 
-const { plugin } = require('../src');
-const { writeFile } = require('fs').promises;
+const { plugin } = require('..');
+const { writeFile } = require('fs/promises');
 
 const key = process.env.FINGERPRINT_KEY ?? '';
 
