@@ -53,6 +53,26 @@ You can always find supported version numbers [here](package.json#L59).
 
 Please note that this plugin only supports the default `selenium` library, wrappers have not been tested and may cause errors.
 
+## Dependencies
+
+In order for the plugin to work correctly, just like in the standard framework, a certain version of `chromedriver` must be installed.
+You can manually install the desired version of the driver, add the path to it in the **PATH** environment variable, and so on.
+But it's best and safer to use a ready-made [npm](https://www.npmjs.com/package/chromedriver) package:
+
+```bash
+npm i chromedriver@109.0.0
+```
+
+If you're not sure which version to install, use the value you can get [here](package.json#L53).
+After the previous step, just add the package import at the very beginning of your code:
+
+```js
+require('chromedriver');
+```
+
+You can look at the examples in the corresponding folder - each uses a similar approach.
+For more information, also refer to the documentation for the original framework.
+
 ## Creating new project
 
 Here's how to start working on a project from scratch.
