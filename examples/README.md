@@ -2,7 +2,7 @@
 
 This folder contains several different examples of using the plugin:
 
-- The `cookies.js` file - фn example of interaction with **all** browser cookies.
+- The `cookies.js` file - an example of interaction with **all** browser cookies.
 - The `profiles.js` file - an example of using profiles in conjunction with a plugin.
 - The `parallel.js` file - an example of running multiple browsers at the same time and extracting different data from the site.
 - The `proxy.js` file - an example of launching a browser with a proxy and additional settings installed, getting an external **IP**.
