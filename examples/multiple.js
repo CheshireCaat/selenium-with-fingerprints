@@ -4,9 +4,9 @@ require('dotenv').config();
 const { plugin } = require('..');
 const { until, By } = require('selenium-webdriver');
 
-(async () => {
-  const key = process.env.FINGERPRINT_KEY ?? '';
+const key = process.env.FINGERPRINT_KEY ?? '';
 
+(async () => {
   for (let i = 0; i < 2; ++i) {
     const fingerprint = await plugin.fetch(key, { tags: ['Microsoft Windows', 'Chrome'] });
     const driver = await plugin.useFingerprint(fingerprint).launch();

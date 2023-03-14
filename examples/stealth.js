@@ -6,7 +6,8 @@ const { writeFile } = require('fs/promises');
 
 const key = process.env.FINGERPRINT_KEY ?? '';
 
-plugin.fetch(key, { tags: ['Microsoft Windows', 'Chrome'] }).then(async (fingerprint) => {
+(async () => {
+  const fingerprint = await plugin.fetch(key, { tags: ['Microsoft Windows', 'Chrome'] });
   const driver = await plugin.useFingerprint(fingerprint).launch();
 
   await driver.get('https://bot.sannysoft.com/');
@@ -14,4 +15,4 @@ plugin.fetch(key, { tags: ['Microsoft Windows', 'Chrome'] }).then(async (fingerp
 
   await writeFile(`${__dirname}/stealth.png`, await driver.takeScreenshot(), 'base64');
   await driver.quit();
-});
+})();
