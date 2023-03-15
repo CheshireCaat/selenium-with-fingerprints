@@ -13,6 +13,8 @@ In general, only **four** basic steps are required, see the example below:
 
 https://user-images.githubusercontent.com/30115373/198843827-f20b628f-49f2-4d13-8ee4-1c72ae490f2e.mp4
 
+Current supported engine version - **109.0.5414.75**.
+
 ## About
 
 This library allows you to change browser fingerprint and use **selenium** automation framework with enhanced anonymity.
