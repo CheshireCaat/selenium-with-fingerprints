@@ -13,7 +13,7 @@ In general, only **four** basic steps are required, see the example below:
 
 https://user-images.githubusercontent.com/30115373/198843827-f20b628f-49f2-4d13-8ee4-1c72ae490f2e.mp4
 
-Current supported engine version - **109.0.5414.75**.
+Current supported engine version - **111.0.5563.65**.
 
 ## About
 
@@ -63,7 +63,7 @@ You can manually install the desired version of the driver, add the path to it i
 But it's best and safer to use a ready-made [npm](https://www.npmjs.com/package/chromedriver) package:
 
 ```bash
-npm i chromedriver@109.0.0
+npm i chromedriver@111.0.0
 ```
 
 If you're not sure which version to install, use the value you can get [here](package.json#L53).
