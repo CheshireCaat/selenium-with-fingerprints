@@ -86,7 +86,8 @@ exports.setViewport = async (driver, { width = 0, height = 0 }) => {
     if (width === viewport.width && height === viewport.height) {
       break;
     } else if (i === MAX_RESIZE_RETRIES - 1) {
-      throw new Error('Unable to set correct viewport size.');
+      // TODO: improve handling of incorrect viewport size.
+      console.warn('Unable to set correct viewport size.');
     }
 
     delta.height += height - viewport.height;
@@ -111,4 +112,4 @@ exports.getViewport = (driver) => driver.executeScript(scripts.getViewport);
  */
 const waitForResize = (driver) => driver.executeScript(scripts.waitForResize);
 
-const MAX_RESIZE_RETRIES = 2;
+const MAX_RESIZE_RETRIES = 3; // TODO: move to common module.
