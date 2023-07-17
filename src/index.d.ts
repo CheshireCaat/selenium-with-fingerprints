@@ -30,7 +30,7 @@ export interface SeleniumFingerprintPlugin extends FingerprintPlugin {
    *
    * ```js
    * const driver = await plugin.launch(
-   *  new webdriver.Builder().setAlertBehaviour('ignore')
+   *  new webdriver.Builder().setAlertBehavior('ignore')
    * );
    * ```
    *
