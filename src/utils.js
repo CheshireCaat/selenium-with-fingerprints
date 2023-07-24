@@ -1,4 +1,4 @@
-const { scripts } = require('browser-with-fingerprints/src/common');
+const { scripts, MAX_RESIZE_RETRIES } = require('browser-with-fingerprints/src/common');
 
 /**
  * Add an event listener for the browser's `close` event.
@@ -69,8 +69,8 @@ exports.bindHooks = (driver, hooks = {}) => {
  *
  * @internal
  */
-exports.setViewport = async (driver, { width = 0, height = 0 }) => {
-  const delta = { width: 16, height: 88 };
+exports.setViewport = async (driver, { diff, width = 0, height = 0 }) => {
+  const delta = diff ? { ...diff } : { width: 16, height: 88 };
 
   const { windowId } = await driver.sendAndGetDevToolsCommand('Browser.getWindowForTarget');
 
@@ -111,5 +111,3 @@ exports.getViewport = (driver) => driver.executeScript(scripts.getViewport);
  * @param {import('selenium-webdriver').WebDriver} driver - The target driver to to wait for the browser to resize.
  */
 const waitForResize = (driver) => driver.executeScript(scripts.waitForResize);
-
-const MAX_RESIZE_RETRIES = 3; // TODO: move to common module.
