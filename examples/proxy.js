@@ -1,7 +1,8 @@
 require('chromedriver');
-require('dotenv').config();
+// require('dotenv').config();
 
-const { plugin } = require('..');
+// Replace this import with `require('..')` if you are running the example from the repository:
+const { plugin } = require('selenium-with-fingerprints');
 const { Options } = require('selenium-webdriver/chrome');
 const { Builder, until, By } = require('selenium-webdriver');
 
