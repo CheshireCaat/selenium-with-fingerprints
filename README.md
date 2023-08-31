@@ -13,7 +13,7 @@ In general, only **four** basic steps are required, see the example below:
 
 https://user-images.githubusercontent.com/30115373/198843827-f20b628f-49f2-4d13-8ee4-1c72ae490f2e.mp4
 
-Current supported engine version - **115.0.5790.99**.
+Current supported engine version - **116.0.5845.97**.
 
 ## About
 
@@ -303,18 +303,19 @@ Thus, you can pre-configure the plugin in a certain way, or change something imm
 
 ### Configuring browser version
 
-Now it is possible to change the browser version while using the plugin - the engine may come with several different builds of the browser.
+You can change the browser version right while using the plugin - the engine may come with several different builds of the browser.
 
-In order to do this, use the **version** property. It defaults to `default`, which means that the latest available version will be used:
+In order to do this, use the **useBrowserVersion** method or the **version** property (deprecated).
+The last one defaults to `default`, which means that the latest available version will be used:
 
 ```js
 const { plugin } = require('selenium-with-fingerprints');
 
 // Use a specific version:
-plugin.version = '115.0.5790.99';
+plugin.useBrowserVersion('115.0.5790.99');
 
 // Use the latest available version:
-plugin.version = 'default';
+plugin.useBrowserVersion('default');
 ```
 
 If you specify an unavailable or invalid version, an appropriate error will be thrown when the browser starts.
@@ -329,7 +330,7 @@ const { plugin } = require('selenium-with-fingerprints');
 // The list of versions is always sorted in descending order:
 await plugin.versions('extended').then((versions) => {
   // The latest available browser version will be used:
-  plugin.version = versions[0]['browser_version'];
+  plugin.useBrowserVersion(versions[0]['browser_version']);
 });
 ```
 
