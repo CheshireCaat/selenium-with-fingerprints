@@ -601,7 +601,7 @@ Get a list of all available browser versions.
 
 - `options` **[Options](https://github.com/CheshireCaat/browser-with-fingerprints/blob/master/src/plugin/launcher/index.d.ts#L54)?** Launcher options that only apply to the browser when using the `spawn` method.
 
-Returns: **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;Browser>**
+Returns: **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;Browser>** Promise which resolves to a browser instance.
 
 Launches a browser instance with given arguments and options when specified.
 
@@ -611,9 +611,20 @@ Launches a browser instance with given arguments and options when specified.
 
 - `builder` **Selenium.Builder** An instance of the builder that will be used to launch the browser.
 
-Returns: **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;Selenium.WebDriver>**
+Returns: **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;Selenium.WebDriver>** Promise which resolves to a browser instance.
 
 Launches **selenium** and launches a browser instance with given arguments and options when specified.
+
+---
+
+#### [plugin.fetch(key, options?)](https://github.com/CheshireCaat/browser-with-fingerprints/blob/master/src/index.d.ts#L411)
+
+- `key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Service key for obtaining a fingerprint.
+- `options` **[FetchOptions](https://github.com/CheshireCaat/browser-with-fingerprints/blob/master/src/index.d.ts#L149)?** Set of configurable options for getting a browser fingerprint.
+
+Returns: **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)&lt;string>** Promise which resolves to a fingerprint string.
+
+Obtain a fingerprint using the specified service key and additional options.
 
 ---
 
@@ -621,9 +632,9 @@ Launches **selenium** and launches a browser instance with given arguments and o
 
 - `value` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Version value as a string.
 
-Set the current browser version used by the plugin instance.
-
 Returns: **this** The same plugin instance with an updated settings (for optional chaining).
+
+Set the current browser version used by the plugin instance.
 
 ---
 
