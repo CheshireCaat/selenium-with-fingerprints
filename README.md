@@ -13,7 +13,7 @@ In general, only **four** basic steps are required, see the example below:
 
 https://user-images.githubusercontent.com/30115373/198843827-f20b628f-49f2-4d13-8ee4-1c72ae490f2e.mp4
 
-Current supported engine version - **116.0.5845.97**.
+Current supported engine version - **119.0.6045.106**.
 
 ## About
 
@@ -390,8 +390,8 @@ const fingerprint = await plugin.fetch('SERVICE_KEY', {
   tags: ['Microsoft Windows', 'Chrome'],
   // Fetch fingerprints only with a browser version higher than 115:
   minBrowserVersion: 115,
-  // Fetch fingerprints only with a browser version lower than 116:
-  maxBrowserVersion: 116,
+  // Fetch fingerprints only with a browser version lower than 119:
+  maxBrowserVersion: 119,
   // Fetch fingerprints only collected in the last 15 days:
   timeLimit: '15 days',
 });
