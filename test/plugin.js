@@ -6,7 +6,7 @@ const { Options } = require('selenium-webdriver/chrome');
 describe('plugin', () => {
   describe('#launch()', () => {
     it('should return the same type as vanilla "selenium" package', async () => {
-      const driver = await plugin.launch(new Builder().setChromeOptions(new Options().headless()));
+      const driver = await plugin.launch(new Builder().setChromeOptions(new Options().addArguments('headless')));
 
       assert.notEqual(driver, null);
       assert.equal(driver.constructor.name, 'Driver');
@@ -17,7 +17,7 @@ describe('plugin', () => {
 
   it('should work with browser normally', async () => {
     await assert.doesNotReject(async () => {
-      const driver = await plugin.launch(new Builder().setChromeOptions(new Options().headless()));
+      const driver = await plugin.launch(new Builder().setChromeOptions(new Options().addArguments('headless')));
 
       await driver.get('https://example.com/');
 
