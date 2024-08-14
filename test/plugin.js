@@ -4,24 +4,32 @@ const { Builder } = require('selenium-webdriver');
 const { Options } = require('selenium-webdriver/chrome');
 
 describe('plugin', () => {
+  let driver;
+
+  before(async () => {
+    const options = new Options();
+    options.addArguments('headless');
+    driver = await plugin.launch({ builder: new Builder().setChromeOptions(options) });
+  });
+
+  after(async () => {
+    if (driver) {
+      await driver.quit();
+    }
+  });
+
   describe('#launch()', () => {
     it('should return the same type as vanilla "selenium" package', async () => {
-      const driver = await plugin.launch(new Builder().setChromeOptions(new Options().addArguments('headless')));
-
-      assert.notEqual(driver, null);
-      assert.equal(driver.constructor.name, 'Driver');
-
-      await driver.quit();
+      assert.ok(driver, 'Driver should not be null');
+      assert.equal(driver.constructor.name, 'Driver', 'Driver should be an instance of Selenium Driver');
     });
   });
 
   it('should work with browser normally', async () => {
-    await assert.doesNotReject(async () => {
-      const driver = await plugin.launch(new Builder().setChromeOptions(new Options().addArguments('headless')));
-
+    try {
       await driver.get('https://example.com/');
-
-      await driver.quit();
-    });
+    } catch (error) {
+      assert.fail(`Browser navigation failed: ${error.message}`);
+    }
   });
 });

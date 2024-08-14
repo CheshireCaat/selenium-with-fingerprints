@@ -7,9 +7,9 @@ const { Options } = require('selenium-webdriver/chrome');
 const { Builder, until, By } = require('selenium-webdriver');
 
 (async () => {
-  const driver = await plugin.launch(
-    new Builder().setChromeOptions(new Options().addArguments([`--user-data-dir=${__dirname}/profile`]))
-  );
+  const driver = await plugin.launch({
+    builder: new Builder().setChromeOptions(new Options().addArguments([`--user-data-dir=${__dirname}/profile`])),
+  });
 
   await driver.get('chrome://version');
 

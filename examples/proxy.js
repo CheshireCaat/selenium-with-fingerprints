@@ -15,15 +15,15 @@ const proxy = process.env.FINGERPRINT_PROXY ?? 'socks5://127.0.0.1:9762';
     changeGeolocation: true,
   });
 
-  const driver = await plugin.launch(
-    new Builder().setChromeOptions(
+  const driver = await plugin.launch({
+    builder: new Builder().setChromeOptions(
       new Options().addArguments([
         // This argument will be ignored if the `useProxy` method has been called.
         `--proxy-server=${proxy}`,
         '--headless',
       ])
-    )
-  );
+    ),
+  });
 
   await driver.get('https://canhazip.com/');
   const pre = await driver.wait(until.elementLocated(By.css('pre')));

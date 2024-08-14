@@ -9,7 +9,7 @@ const key = process.env.FINGERPRINT_KEY ?? '';
 
 (async () => {
   const fingerprint = await plugin.fetch(key, { tags: ['Microsoft Windows', 'Chrome'] });
-  const driver = await plugin.useFingerprint(fingerprint).launch();
+  const driver = await plugin.useFingerprint(fingerprint).launch({ key });
 
   await driver.get('https://bot.sannysoft.com/');
   await new Promise((fn) => setTimeout(fn, 5000));

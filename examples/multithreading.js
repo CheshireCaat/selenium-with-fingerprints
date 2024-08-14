@@ -9,7 +9,7 @@ const key = process.env.FINGERPRINT_KEY ?? '';
 
 async function main() {
   const fingerprint = await plugin.fetch(key, { tags: ['Microsoft Windows', 'Chrome'] });
-  const driver = await plugin.useFingerprint(fingerprint).launch();
+  const driver = await plugin.useFingerprint(fingerprint).launch({ key });
 
   const getText = (selector) =>
     driver.wait(until.elementLocated(By.css(selector))).then((el) => el.getAttribute('textContent'));

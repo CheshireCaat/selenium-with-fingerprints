@@ -2,6 +2,22 @@ import type { Builder, WebDriver } from 'selenium-webdriver';
 import type { FingerprintPlugin } from 'browser-with-fingerprints';
 
 /**
+ * Launcher options that only apply to the browser when using the `launch` method.
+ */
+export type LaunchOptions = {
+  /**
+   * An instance of the builder that will be used to launch the browser.
+   */
+  builder?: Builder;
+
+  /**
+   * Service key for applying a fingerprint.
+   * @default ''
+   */
+  key?: string;
+};
+
+/**
  * Describes a plugin that is capable of fetching a fingerprint and launching a browser instance using it.
  *
  * @remarks
@@ -25,19 +41,21 @@ export interface SeleniumFingerprintPlugin extends FingerprintPlugin {
    *
    * If you need to use the default browsers without fingerprint spoofing, just use the **selenium** built-in methods.
    *
+   * You must specify the service key to apply the fingerprint when launching the browser (if the fingerprint was obtained using a paid key).
+   *
    * @example
    * An example of launching the browser in visible mode:
    *
    * ```js
-   * const driver = await plugin.launch(
-   *  new webdriver.Builder().setAlertBehavior('ignore')
-   * );
+   * const driver = await plugin.launch({
+   *   builder: new webdriver.Builder().setAlertBehavior('ignore'),
+   * });
    * ```
    *
-   * @param builder - An instance of the builder that will be used to launch the browser.
+   * @param options - Set of configurable options to set on the browser.
    * @returns Promise which resolves to a browser instance.
    */
-  launch(builder?: Builder): Promise<WebDriver>;
+  launch(options?: LaunchOptions): Promise<WebDriver>;
 }
 
 /**

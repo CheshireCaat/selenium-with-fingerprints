@@ -13,9 +13,17 @@ const Plugin = class SeleniumFingerprintPlugin extends FingerprintPlugin {
     });
   }
 
-  async launch(builder = new Builder()) {
-    const options = new Options(builder.getChromeOptions());
-    const capability = options.get(options.CAPABILITY_KEY);
+  async launch(options = {}) {
+    if (options instanceof Builder) {
+      console.warn(
+        'Warning: the provided options argument is an instance of Builder, which is deprecated - please, use the new syntax for options.'
+      );
+      options = { builder: options };
+    }
+
+    const { key, builder = new Builder() } = options;
+    const chromeOptions = new Options(builder.getChromeOptions());
+    const capability = chromeOptions.get(chromeOptions.CAPABILITY_KEY);
 
     for (const option of Object.keys(capability)) {
       if (option.includes('android')) {
@@ -25,7 +33,7 @@ const Plugin = class SeleniumFingerprintPlugin extends FingerprintPlugin {
 
     const args = (capability.args ?? []).map((arg) => (arg.includes('--') ? arg : `--${arg}`));
 
-    return await super.launch({ args, builder, options, headless: args.includes('--headless') });
+    return await super.launch({ key, args, builder, options: chromeOptions, headless: args.includes('--headless') });
   }
 
   /**

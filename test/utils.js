@@ -7,15 +7,29 @@ const { bindHooks, getViewport, setViewport } = require('../src/utils');
 describe('utils', () => {
   let driver = null;
 
+  beforeEach(async function () {
+    const options = new Options();
+    if (!this.test.title.includes('headful')) {
+      options.addArguments('headless');
+    }
+    driver = await plugin.launch({ builder: new Builder().setChromeOptions(options) });
+  });
+
+  afterEach(async () => {
+    if (driver) {
+      await driver.quit();
+    }
+  });
+
   describe('#getViewport()', () => {
     ['headless', 'headful'].forEach((type) => {
       it(`should return the ${type} browser viewport size`, async () => {
         const viewport = await getViewport(driver);
 
-        assert.notEqual(viewport, null);
-        assert.equal(typeof viewport, 'object');
-        assert.equal(typeof viewport.width, 'number');
-        assert.equal(typeof viewport.height, 'number');
+        assert.ok(viewport, 'Viewport should not be null');
+        assert.equal(typeof viewport, 'object', 'Viewport should be an object');
+        assert.equal(typeof viewport.width, 'number', 'Viewport width should be a number');
+        assert.equal(typeof viewport.height, 'number', 'Viewport height should be a number');
       });
     });
   });
@@ -25,10 +39,9 @@ describe('utils', () => {
       it(`should change the ${type} browser viewport size`, async () => {
         for (let step = 5; step <= 10; ++step) {
           const viewport = { width: step * 100, height: step * 100 };
-
           await setViewport(driver, viewport);
 
-          assert.deepEqual(await getViewport(driver), viewport);
+          assert.deepEqual(await getViewport(driver), viewport, `Viewport should be ${JSON.stringify(viewport)}`);
         }
       });
     });
@@ -37,10 +50,11 @@ describe('utils', () => {
   describe('#bindHooks()', () => {
     it('should correctly modify original methods', async () => {
       bindHooks(driver);
-
-      await assert.doesNotReject(async () => {
+      try {
         await driver.switchTo().newWindow('window');
-      });
+      } catch (error) {
+        assert.fail(`Window creation failed: ${error.message}`);
+      }
 
       assert.equal(driver.manage().constructor.name, 'Options');
       assert.equal(driver.manage().window().constructor.name, 'Window');
@@ -49,13 +63,11 @@ describe('utils', () => {
 
     it('should prevent viewport resizing', async () => {
       bindHooks(driver);
-
       const viewport = { width: 100, height: 100 };
 
       for (let i = 0; i < 2; ++i) {
         if (i > 0) await driver.manage().window().setRect(viewport);
-
-        assert.notDeepEqual(await getViewport(driver), viewport);
+        assert.notDeepEqual(await getViewport(driver), viewport, 'Viewport should not equal the restricted size');
       }
     });
 
@@ -65,16 +77,9 @@ describe('utils', () => {
           bindHooks(driver, { onPageCreated: () => resolve() });
         });
 
-        assert.equal(await Promise.race([waitForHook, driver.switchTo().newWindow('window')]), void 0);
+        const result = await Promise.race([waitForHook, driver.switchTo().newWindow('window')]);
+        assert.equal(result, undefined, 'Callback should execute before new window is created');
       });
     });
   });
-
-  beforeEach(async function () {
-    const options = new Options();
-    if (!this.test.title.includes('headful')) options.addArguments('headless');
-    driver = await plugin.launch(new Builder().setChromeOptions(options));
-  });
-
-  afterEach(() => driver?.quit());
 });
