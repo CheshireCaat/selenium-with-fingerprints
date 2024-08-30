@@ -5,11 +5,13 @@ require('chromedriver');
 const { plugin } = require('selenium-with-fingerprints');
 const { until, By } = require('selenium-webdriver');
 
-const key = process.env.FINGERPRINT_KEY ?? '';
+// Set the service key for the plugin (you can buy it here https://bablosoft.com/directbuy/FingerprintSwitcher/2).
+// Leave an empty string to use the free version.
+plugin.setServiceKey(process.env.FINGERPRINT_KEY ?? '');
 
 async function main() {
-  const fingerprint = await plugin.fetch(key, { tags: ['Microsoft Windows', 'Chrome'] });
-  const driver = await plugin.useFingerprint(fingerprint).launch({ key });
+  const fingerprint = await plugin.fetch({ tags: ['Microsoft Windows', 'Chrome'] });
+  const driver = await plugin.useFingerprint(fingerprint).launch();
 
   const getText = (selector) =>
     driver.wait(until.elementLocated(By.css(selector))).then((el) => el.getAttribute('textContent'));

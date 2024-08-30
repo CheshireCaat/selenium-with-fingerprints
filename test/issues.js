@@ -4,7 +4,7 @@ const { setTimeout } = require('timers/promises');
 const { Builder, By } = require('selenium-webdriver');
 const { Options } = require('selenium-webdriver/chrome');
 
-describe.skip('plugin', () => {
+describe('plugin', () => {
   let driver;
 
   before(async () => {

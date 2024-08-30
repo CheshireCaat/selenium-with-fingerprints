@@ -12,6 +12,7 @@ export type LaunchOptions = {
 
   /**
    * Service key for applying a fingerprint.
+   *
    * @default ''
    */
   key?: string;
