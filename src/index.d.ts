@@ -15,7 +15,7 @@ export type LaunchOptions = {
    *
    * @default ''
    */
-  key?: string;
+  // key?: string;
 };
 
 /**
