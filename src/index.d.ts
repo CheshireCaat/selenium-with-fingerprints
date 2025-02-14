@@ -9,13 +9,6 @@ export type LaunchOptions = {
    * An instance of the builder that will be used to launch the browser.
    */
   builder?: Builder;
-
-  /**
-   * Service key for applying a fingerprint.
-   *
-   * @default ''
-   */
-  // key?: string;
 };
 
 /**
@@ -31,10 +24,7 @@ export interface SeleniumFingerprintPlugin extends FingerprintPlugin {
    * This method uses the selenium's native {@link Builder.build | build} method under the hood and adds some functionality for applying fingerprints and proxies.
    * Before launching, the parameters that you specified using the {@link useProxy} and {@link useFingerprint} methods will also be applied for the browser.
    *
-   * If you need more information on how the native method works, use the **selenium** documentation for the
-   * [builder](https://www.selenium.dev/selenium/docs/api/javascript/module/selenium-webdriver/index_exports_Builder.html)
-   * and
-   * [options](https://www.selenium.dev/selenium/docs/api/javascript/module/selenium-webdriver/chrome_exports_Options.html).
+   * If you need more information on how the native method works, use the **selenium** documentation for the [builder](https://www.selenium.dev/selenium/docs/api/javascript/Builder.html).
    *
    * @remarks
    * **NOTE**: This plugin only works with the `chromium` browser, which comes bundled with the plugin.
