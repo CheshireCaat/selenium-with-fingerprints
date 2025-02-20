@@ -15,6 +15,8 @@ https://user-images.githubusercontent.com/30115373/198843827-f20b628f-49f2-4d13-
 
 Current supported engine version - **132.0.6834.84**.
 
+**IMPORTANT NOTE:** plugin only work on **Windows** operating system, it cannot be installed and used on **Linux**, **macOS** and other systems!
+
 ## About
 
 This library allows you to change browser fingerprint and use **selenium** automation framework with enhanced anonymity.
