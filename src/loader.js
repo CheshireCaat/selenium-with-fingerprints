@@ -7,4 +7,4 @@ const Loader = require('browser-with-fingerprints/src/loader');
  *
  * @internal
  */
-exports.loader = new Loader('selenium-webdriver', '4.5.0', []);
+module.exports = new Loader('selenium-webdriver', '4.5.0', []);

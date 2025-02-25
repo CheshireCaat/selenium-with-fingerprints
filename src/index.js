@@ -1,4 +1,6 @@
-const { loader } = require('./loader');
+const defaultLauncher = require('./loader').load();
+const { Builder } = require('selenium-webdriver/index');
+const { Options } = require('selenium-webdriver/chrome');
 const { FingerprintPlugin } = require('browser-with-fingerprints');
 const { onClose, bindHooks, getViewport, setViewport } = require('./utils');
 
@@ -65,8 +67,4 @@ const Plugin = class SeleniumFingerprintPlugin extends FingerprintPlugin {
   }
 };
 
-exports.plugin = new Plugin(loader.load());
-
-const { Builder } = require('selenium-webdriver/index');
-
-const { Options } = require('selenium-webdriver/chrome');
+exports.plugin = new Plugin(defaultLauncher);
