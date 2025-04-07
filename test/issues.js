@@ -8,12 +8,16 @@ describe('plugin', () => {
   let driver;
 
   before(async () => {
+    plugin.useProxy(process.env.FINGERPRINT_PROXY || '');
+
     const options = new Options();
-    options.addArguments('headless', '--bas-disable-tab-hook');
+    options.addArguments('headless');
     driver = await plugin.launch({ builder: new Builder().setChromeOptions(options) });
   });
 
   after(async () => {
+    plugin.useProxy('');
+
     if (driver) {
       await driver.close();
     }
