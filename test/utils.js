@@ -9,7 +9,7 @@ describe('utils', () => {
 
   beforeEach(async function () {
     const options = new Options();
-    if (!this.test.title.includes('headful')) {
+    if (this.test.title.includes('headless')) {
       options.addArguments('headless');
     }
     driver = await plugin.launch({ builder: new Builder().setChromeOptions(options) });

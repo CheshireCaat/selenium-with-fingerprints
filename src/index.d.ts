@@ -57,3 +57,5 @@ export interface SeleniumFingerprintPlugin extends FingerprintPlugin {
  * the **selenium** imports with a plugin if you don't need additional options.
  */
 export declare const plugin: SeleniumFingerprintPlugin;
+
+export type * from 'browser-with-fingerprints';
